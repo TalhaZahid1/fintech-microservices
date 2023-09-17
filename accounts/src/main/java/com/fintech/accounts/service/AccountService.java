@@ -7,4 +7,5 @@ public interface AccountService {
     Account debitUserAccount(String userId, Double amount);
     Account creditUserAccount(String userId, Double amount);
     Account creditPayeeAccount(String payeeId, Double amount);
+    void addAccount(Account account);
 }

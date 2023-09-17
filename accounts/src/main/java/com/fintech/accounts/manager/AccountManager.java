@@ -14,7 +14,6 @@ public record AccountManager(AccountService accountService) {
 
     private AccountModel convertEntityToModel(Account account) {
         return AccountModel.builder()
-                .userId(account.getUserId().getUserId())
                 .number(account.getNumber())
                 .title(account.getTitle())
                 .type(account.getType())
@@ -29,6 +28,7 @@ public record AccountManager(AccountService accountService) {
     }
 
     public String creditAccount(CreditAccountModel creditAccountModel) {
+        //ONLINK SERVICE TO DEBIT SENDER ACCOUNT CODE WILL GO HERE
         accountService.creditUserAccount(creditAccountModel.getUserId(), creditAccountModel.getAmountDebited());
         return "OK";
     }

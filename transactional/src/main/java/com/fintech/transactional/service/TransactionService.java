@@ -5,4 +5,5 @@ import com.fintech.transactional.entity.Transaction;
 public interface TransactionService {
 
     Transaction creditAccount(Transaction transaction);
+    Transaction debitAccount(Transaction transaction);
 }

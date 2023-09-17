@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class AccountModel {
 
-    private String userId;
     private String number;
     private String title;
     private String type;

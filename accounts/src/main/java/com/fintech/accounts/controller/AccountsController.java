@@ -3,6 +3,7 @@ package com.fintech.accounts.controller;
 
 import com.fintech.accounts.manager.AccountManager;
 import com.fintech.accounts.model.AccountModel;
+import com.fintech.accounts.model.CreditAccountModel;
 import com.fintech.accounts.model.DebitAccountModel;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,19 @@ public class AccountsController {
     @Autowired
     private AccountManager accountManager;
 
-    //acctdetails
     @GetMapping
     public AccountModel getAccountDetails(@RequestParam String userId) {
         return accountManager.getUserAccountDetail(userId);
     }
-    //debitAccount
-    @PostMapping("/debitAccount")
+
+    @PostMapping("/debit")
     public String debitAccount(@RequestBody DebitAccountModel debitAccountModel){
         return accountManager.debitAccount(debitAccountModel);
+    }
+
+
+    @PostMapping("/credit")
+    public String debitAccount(@RequestBody CreditAccountModel creditAccountModel){
+        return accountManager.creditAccount(creditAccountModel);
     }
 }

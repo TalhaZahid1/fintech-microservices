@@ -15,4 +15,9 @@ public class TransactionServiceImpl implements TransactionService {
     public Transaction creditAccount(Transaction transaction) {
         return transactionRepository.save(transaction);
     }
+
+    @Override
+    public Transaction debitAccount(Transaction transaction) {
+        return transactionRepository.save(transaction);
+    }
 }

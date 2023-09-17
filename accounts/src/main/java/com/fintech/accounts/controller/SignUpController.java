@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/signup")
-public class CustomerSignUpController {
+@RequestMapping("/signUp")
+public class SignUpController {
 
     @Autowired
     private UserManager userManager;

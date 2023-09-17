@@ -16,14 +16,12 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
 
     @Override
-    public String save(User user) {
+    public User save(User user) {
         if(userRepository.findByEmail(user.getEmail()) == null) {
-            User userSaved = userRepository.save(user);
-            return userSaved.getId()!=null ? "Saved" : "Not Saved. Internal Server Error";
-        } else if(userRepository.findByContactNumber(user.getContactNumber()) == null){
-            return "Phone Number Already Exist!";
+            return userRepository.save(user);
+        } else{
+            return null;
         }
-            return "Email Already Exist!";
     }
 
     @Override

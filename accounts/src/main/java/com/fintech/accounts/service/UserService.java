@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserService {
 
-    String save(User user);
+    User save(User user);
 
     User findByUserId(String userId);
 

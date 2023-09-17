@@ -25,4 +25,6 @@ public class Transaction {
     private String payeeId;
     private Integer number;
     private String time;
+    private String senderAccountNumber;
+    private String senderAccountTitle;
 }

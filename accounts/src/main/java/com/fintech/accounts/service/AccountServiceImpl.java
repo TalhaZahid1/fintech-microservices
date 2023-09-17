@@ -46,5 +46,10 @@ public class AccountServiceImpl implements AccountService{
         return accountRepository.save(payeeAccount);
     }
 
+    @Override
+    public void addAccount(Account account) {
+        accountRepository.save(account);
+    }
+
 
 }

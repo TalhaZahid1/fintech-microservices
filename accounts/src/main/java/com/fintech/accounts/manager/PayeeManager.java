@@ -4,13 +4,23 @@ import com.fintech.accounts.entity.Payee;
 import com.fintech.accounts.model.PayeeModel;
 import com.fintech.accounts.service.PayeeService;
 import com.fintech.accounts.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public record PayeeManager(PayeeService payeeService, UserService userService) {
+public class PayeeManager {
+
+    private final PayeeService payeeService;
+    private final UserService userService;
+
+    @Autowired
+    public PayeeManager(PayeeService payeeService, UserService userService) {
+        this.payeeService = payeeService;
+        this.userService = userService;
+    }
 
     public String addPayee(PayeeModel payeeModel){
         return payeeService.addPayee(payeeModelToEntity(payeeModel)) ? "Payee Added" : "Payee Already Exists!";
