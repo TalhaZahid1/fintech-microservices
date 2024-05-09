@@ -1,6 +1,6 @@
 package com.fintech.transactional.manager;
 
-import com.fintech.transactional.feignclient.AccountServiceClient;
+import com.fintech.transactional.fiegnclient.AccountServiceClient;
 import com.fintech.transactional.model.CreditAccountModel;
 import com.fintech.transactional.model.DebitAccountModel;
 import com.fintech.transactional.entity.Transaction;
@@ -13,15 +13,25 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.UUID;
 
-public record TransactionalManager(TransactionService transactionService, AccountServiceClient accountServiceClient, KafkaService kafkaService) {
+public class TransactionalManager {
 
-    @Transactional(propagation = Propagation.MANDATORY, rollbackFor = NullPointerException.class)
+    private TransactionService transactionService;
+    private KafkaService kafkaService;
+    private AccountServiceClient accountServiceClient;
+
+    public TransactionalManager(TransactionService transactionService, KafkaService kafkaService, AccountServiceClient accountServiceClient) {
+        this.transactionService = transactionService;
+        this.kafkaService = kafkaService;
+        this.accountServiceClient = accountServiceClient;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = NullPointerException.class)
     public TransactionResponse debitAccount(DebitAccountModel debitAccountModel) {
         String response = accountServiceClient.debitAccount(debitAccountModel);
         if(response.equalsIgnoreCase("OK")){
             Transaction transaction = transactionService.debitAccount(constructDebitTransaction(debitAccountModel));
             kafkaService.sendMessae("Your account debited with amount " +  transaction.getAmount() + " to beneficiary "+ transaction.getPayeeId());
-            return new TransactionResponse(true, transaction.getNumber().toString(), transaction.getTime());
+            return new TransactionResponse(true, transaction.getId().toString(), transaction.getTime());
         }
         return new TransactionResponse(false, "", "");
     }
@@ -31,7 +41,7 @@ public record TransactionalManager(TransactionService transactionService, Accoun
                 .userId(debitAccountModel.getUserId())
                 .amount(debitAccountModel.getAmountDebited())
                 .payeeId(debitAccountModel.getPayeeId())
-                .number(Integer.parseInt(UUID.randomUUID().toString()))
+//                .number(Integer.parseInt(UUID.randomUUID().toString()))
                 .time(new Date().toString())
                 .build();
     }
@@ -41,7 +51,7 @@ public record TransactionalManager(TransactionService transactionService, Accoun
         if(response.equalsIgnoreCase("OK")){
             Transaction transaction = transactionService.creditAccount(constructCreditTransaction(creditAccountModel));
             kafkaService.sendMessae("Your account credited with amount " +  transaction.getAmount() + " from "+ transaction.getSenderAccountTitle());
-            return new TransactionResponse(true, transaction.getNumber().toString(), transaction.getTime());
+            return new TransactionResponse(true, transaction.getId().toString(), transaction.getTime());
         }
         return new TransactionResponse(false, "", "");
     }

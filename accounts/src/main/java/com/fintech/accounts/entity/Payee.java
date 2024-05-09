@@ -23,7 +23,7 @@ public class Payee {
     private String nickName;
     private String bankName;
     //TODO add account relation many to one instead of user
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User userId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

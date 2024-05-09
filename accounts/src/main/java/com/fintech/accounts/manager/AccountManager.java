@@ -28,8 +28,12 @@ public record AccountManager(AccountService accountService) {
     }
 
     public String creditAccount(CreditAccountModel creditAccountModel) {
-        //ONLINK SERVICE TO DEBIT SENDER ACCOUNT CODE WILL GO HERE
+        //ONELINK SERVICE TO DEBIT SENDER ACCOUNT CODE WILL GO HERE
         accountService.creditUserAccount(creditAccountModel.getUserId(), creditAccountModel.getAmountDebited());
         return "OK";
+    }
+
+    public Double getAccountBalance(String userId) {
+        return accountService.getAccountBalance(userId);
     }
 }

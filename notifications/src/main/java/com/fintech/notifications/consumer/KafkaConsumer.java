@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaConsumer {
 
-    @KafkaListener(topics = "transaction")
+    @KafkaListener(topics = "fintech-messages",
+            groupId = "test-consumer-group")
     public void consume(String message)
     {
         // TODO send email or text

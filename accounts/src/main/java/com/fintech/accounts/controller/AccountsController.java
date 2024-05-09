@@ -27,6 +27,10 @@ public class AccountsController {
         return accountManager.debitAccount(debitAccountModel);
     }
 
+    @GetMapping("/checkBalance")
+    public Double checkAccountBalance(@RequestParam String userId){
+        return accountManager.getAccountBalance(userId);
+    }
 
     @PostMapping("/credit")
     public String debitAccount(@RequestBody CreditAccountModel creditAccountModel){

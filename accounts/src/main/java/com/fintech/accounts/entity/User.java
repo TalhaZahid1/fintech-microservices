@@ -26,8 +26,7 @@ public class User {
     private String password;
     @Column(name = "contact_number")
     private String contactNumber;
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "payee_id", referencedColumnName = "id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Payee> payee;
 
 }

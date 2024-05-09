@@ -8,4 +8,6 @@ public interface AccountService {
     Account creditUserAccount(String userId, Double amount);
     Account creditPayeeAccount(String payeeId, Double amount);
     void addAccount(Account account);
+
+    Double getAccountBalance(String userId);
 }

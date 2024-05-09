@@ -22,8 +22,8 @@ public class Account {
     private String title;
     private String type;
     private Double balance;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User userId;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private String userId;
 
 }

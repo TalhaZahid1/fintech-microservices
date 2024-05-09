@@ -51,5 +51,10 @@ public class AccountServiceImpl implements AccountService{
         accountRepository.save(account);
     }
 
+    @Override
+    public Double getAccountBalance(String userId) {
+        return accountRepository.findByUserId(userId).getBalance();
+    }
+
 
 }

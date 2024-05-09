@@ -9,9 +9,10 @@ import com.fintech.accounts.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class AccountsApplication {
 
 	@Autowired
@@ -27,7 +28,7 @@ public class AccountsApplication {
 
 	@Bean
 	public UserManager userManager(){
-		return new UserManager(userService);
+		return new UserManager(userService, accountService);
 	}
 
 	@Bean

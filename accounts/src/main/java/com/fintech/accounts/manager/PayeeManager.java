@@ -28,7 +28,7 @@ public class PayeeManager {
 
     private Payee payeeModelToEntity(PayeeModel payeeModel) {
         return Payee.builder()
-                .userId(userService.findByUserId(payeeModel.getUserId()))
+                .user(userService.findByUserId(payeeModel.getUserId()))
                 .accountNumber(payeeModel.getAccountNumber())
                 .accountTitle(payeeModel.getAccountTitle())
                 .bankName(payeeModel.getBankName())
@@ -53,7 +53,7 @@ public class PayeeManager {
                         .accountTitle(payee.getAccountTitle())
                         .bankName(payee.getBankName())
                         .nickName(payee.getNickName())
-                        .userId(payee.getUserId().getUserId())
+                        .userId(payee.getUser().getUserId())
                         .build()));
         return payeeModels;
     }

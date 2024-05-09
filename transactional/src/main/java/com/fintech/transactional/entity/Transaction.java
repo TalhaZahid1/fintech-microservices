@@ -23,7 +23,7 @@ public class Transaction {
     private String userId;
     private Double amount;
     private String payeeId;
-    private Integer number;
+//    private Integer number;
     private String time;
     private String senderAccountNumber;
     private String senderAccountTitle;
